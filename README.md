@@ -7,14 +7,14 @@
 - 注解 bun 源码. zig 目前最大的应用项目.
 - 通过源码分析, 快速掌握 zig.
 
-## 架构分析:
+## 源码分析:
 
-- bun 项目导读
+- bun 分析笔记: [.annotated/](./.annotated/readme.md)
 
 ## zig 环境搭建:
 
-- zig 安装
-- vscode 配置
+- [zig + vscode/clion 搭建开发环境](https://github.com/hhstore/blog/issues/376)
+- [zig + vscode debug 断点调试配置](https://github.com/hhstore/blog/issues/375)
 
 # bun
 
@@ -56,7 +56,7 @@ If using Linux, kernel version 5.6 or higher is strongly recommended, but the mi
 ## Table of Contents
 
 - [bun 源码分析:](#bun-源码分析)
-  - [架构分析:](#架构分析)
+  - [源码分析:](#源码分析)
   - [zig 环境搭建:](#zig-环境搭建)
 - [bun](#bun)
   - [Install](#install)
