@@ -3427,6 +3427,11 @@ pub const Server = struct {
         }
     }
 
+    // ----------------------------------------------------------------
+
+    // todo x:
+    // todo x:
+    // todo x:
     fn run(server: *Server, comptime features: ConnectionFeatures) !void {
         _ = Fs.FileSystem.RealFS.adjustUlimit() catch {};
 
@@ -3435,6 +3440,10 @@ pub const Server = struct {
         ).init(server.allocator);
         const listener = try tcp.Listener.init(.ip, .{ .close_on_exec = true });
         defer listener.deinit();
+
+        // todo x:
+        // todo x:
+        // todo x:
         server.websocket_threadpool.stack_size = @truncate(
             u32,
             @minimum(
@@ -3451,6 +3460,9 @@ pub const Server = struct {
 
         // try listener.ack(true);
 
+        // todo x:
+        // todo x:
+        // todo x:
         var port: u16 = 3000;
 
         if (server.transform_options.port) |_port| {
@@ -3497,7 +3509,11 @@ pub const Server = struct {
             }
         }
 
+        // ----------------------------------------------------------------
+
+        // todo x:
         try listener.listen(1280);
+
         const addr = try listener.getLocalAddress();
         if (server.bundler.options.origin.getPort()) |_port| {
             if (_port != addr.ipv4.port) {
@@ -3938,9 +3954,19 @@ pub const Server = struct {
     }
 
     pub var global_start_time: std.time.Timer = undefined;
+
+    // ----------------------------------------------------------------
+
+    // todo x:
+    // todo x:
+    // todo x:
     pub fn start(allocator: std.mem.Allocator, options: Api.TransformOptions, comptime DebugType: type, debug: DebugType) !void {
         var log = logger.Log.init(allocator);
         var server = try allocator.create(Server);
+
+        // todo x:
+        // todo x:
+        // todo x:
         server.* = Server{
             .allocator = allocator,
             .log = log,
@@ -3985,8 +4011,14 @@ pub const Server = struct {
 
         server.websocket_threadpool.on_thread_spawn = RequestContext.WebsocketHandler.onSpawnThread;
 
+        // ----------------------------------------------------------------
+
         if (server.bundler.router != null and server.bundler.options.routes.static_dir_enabled) {
             if (!public_folder_is_top_level) {
+
+                // todo x:
+                // todo x:
+                // todo x:
                 try server.run(
                     ConnectionFeatures{ .public_folder = .first, .filesystem_router = true },
                 );

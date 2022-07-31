@@ -284,6 +284,12 @@ pub export fn Bun__queueMicrotask(global: *JSGlobalObject, task: *JSC.CppTask) v
 // We can see that it's sort of like std.mem.Allocator but for JSGlobalContextRef, to support Automatic Reference Counting
 // Its unavailable on Linux
 
+
+////////////////////////////////////////////////////////////////
+
+// todo x:
+// todo x:
+// todo x:
 // JavaScriptCore expects 1 VM per thread
 // However, there can be many JSGlobalObject
 // We currently assume a 1:1 correspondence between the two.

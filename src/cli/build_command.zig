@@ -30,7 +30,16 @@ const NodeModuleBundle = @import("../node_module_bundle.zig").NodeModuleBundle;
 const fs = @import("../fs.zig");
 const constStrToU8 = bun.constStrToU8;
 
+// ----------------------------------------------------------------
+
+// todo x:
+// todo x:
+// todo x:
 pub const BuildCommand = struct {
+
+    // todo x:
+    // todo x:
+    // todo x:
     pub fn exec(ctx: Command.Context) !void {
         var result: options.TransformResult = undefined;
         switch (ctx.args.resolve orelse Api.ResolveMode.dev) {

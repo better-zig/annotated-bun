@@ -58,10 +58,19 @@ const Reporter = @import("./report.zig");
 pub var start_time: i128 = undefined;
 const Bunfig = @import("./bunfig.zig").Bunfig;
 
+// todo x:
+// todo x: 命令行 CMD 解析 & 调用指令
+// todo x:
 pub const Cli = struct {
     var wait_group: sync.WaitGroup = undefined;
     var log_: logger.Log = undefined;
     pub fn startTransform(_: std.mem.Allocator, _: Api.TransformOptions, _: *logger.Log) anyerror!void {}
+
+    ///////////////////////////////////////////////////////////////
+
+    // todo x:
+    // todo x: cli 入口(), 注意该方法实现, 类似 泛型(鸭子类型)/多态.
+    // todo x:
     pub fn start(allocator: std.mem.Allocator, _: anytype, _: anytype, comptime MainPanicHandler: type) void {
         start_time = std.time.nanoTimestamp();
         log_ = logger.Log.init(allocator);
@@ -830,6 +839,9 @@ pub const Command = struct {
         }
     };
 
+    // todo x:
+    // todo x:
+    // todo x:
     pub fn which() Tag {
         var args_iter = ArgsIterator{ .buf = std.os.argv };
         // first one is the executable name
@@ -903,6 +915,11 @@ pub const Command = struct {
         "help",
     };
 
+    ////////////////////////////////////////////////////////////////
+
+    // todo x:
+    // todo x:
+    // todo x:
     pub fn start(allocator: std.mem.Allocator, log: *logger.Log) !void {
         const tag = which();
 
@@ -913,16 +930,22 @@ pub const Command = struct {
             else => {},
         }
 
+        // todo x:
+        // todo x:
+        // todo x:
         switch (tag) {
+            // todo x:
             .BunCommand => {
                 const ctx = try Command.Context.create(allocator, log, .BunCommand);
 
-                try BunCommand.exec(ctx);
+                try BunCommand.exec(ctx); // todo x: 入口
             },
+
+            // todo x:
             .DevCommand => {
                 const ctx = try Command.Context.create(allocator, log, .DevCommand);
 
-                try DevCommand.exec(ctx);
+                try DevCommand.exec(ctx); // todo x: 入口
             },
             .BuildCommand => {
                 const ctx = try Command.Context.create(allocator, log, .BuildCommand);
@@ -1226,6 +1249,9 @@ pub const Command = struct {
         }
     }
 
+    // ----------------------------------------------------------------
+    // todo x: 解析 CLI CMD 类型
+    // ----------------------------------------------------------------
     pub const Tag = enum {
         AutoCommand,
         BuildCommand,

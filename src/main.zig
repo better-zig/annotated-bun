@@ -19,9 +19,17 @@ pub const JSC = @import("javascript_core");
 const default_allocator = bun.default_allocator;
 const C = bun.C;
 const panicky = @import("panic_handler.zig");
+
+// todo x:
+// todo x:
+// todo x:
 const cli = @import("cli.zig");
 pub const MainPanicHandler = panicky.NewPanicHandler(std.builtin.default_panic);
 const js = @import("bun.js/bindings/bindings.zig");
+
+// todo x:
+// todo x:
+// todo x:
 const JavaScript = @import("bun.js/javascript.zig");
 pub const io_mode = .blocking;
 pub const bindgen = if (@import("builtin").is_test) undefined else @import("build_options").bindgen;
@@ -37,6 +45,12 @@ pub fn PLCrashReportHandler() void {
 }
 
 pub var start_time: i128 = 0;
+
+////////////////////////////////////////////////////////////////////////
+
+// todo x:
+// todo x: 项目源码入口
+// todo x
 pub fn main() void {
     if (comptime Environment.isRelease)
         CrashReporter.start(null, Report.CrashReportWriter.printFrame, Report.handleCrash) catch unreachable;
@@ -57,15 +71,27 @@ pub fn main() void {
     Output.Source.set(&output_source);
     defer Output.flush();
 
+    // todo x:
+    // todo x:
+    // todo x:
     cli.Cli.start(default_allocator, stdout, stderr, MainPanicHandler);
 
+    // todo x:
+    // todo x:
+    // todo x:
     std.mem.doNotOptimizeAway(JavaScriptVirtualMachine.fetch);
     std.mem.doNotOptimizeAway(JavaScriptVirtualMachine.init);
     std.mem.doNotOptimizeAway(JavaScriptVirtualMachine.resolve);
 }
 
+// todo x:
+// todo x:
+// todo x:
 pub const JavaScriptVirtualMachine = JavaScript.VirtualMachine;
 
+////////////////////////////////////////////////////////////////////////
+
+// todo x: 单元测试
 test "" {
     @import("std").testing.refAllDecls(@This());
 
