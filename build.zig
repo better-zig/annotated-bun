@@ -1,6 +1,7 @@
 const std = @import("std");
 const resolve_path = @import("./src/resolver/resolve_path.zig");
 
+// todo x:
 fn pkgPath(comptime out: []const u8) std.build.FileSource {
     const outpath = comptime std.fs.path.dirname(@src().file).? ++ std.fs.path.sep_str ++ out;
     return .{ .path = outpath };
@@ -209,6 +210,7 @@ const CrossTarget = std.zig.CrossTarget;
 const Mode = std.builtin.Mode;
 const fs = std.fs;
 
+// todo x: 构建入口:
 pub fn build(b: *std.build.Builder) !void {
     // Standard target options allows the person running `zig build` to choose
     // what target to build for. Here we do not override the defaults, which
@@ -222,6 +224,8 @@ pub fn build(b: *std.build.Builder) !void {
     const cwd: []const u8 = b.pathFromRoot(".");
     var exe: *std.build.LibExeObjStep = undefined;
     var output_dir_buf = std.mem.zeroes([4096]u8);
+
+    // todo x:
     var bin_label = if (mode == std.builtin.Mode.Debug) "packages/debug-bun-" else "packages/bun-";
 
     var triplet_buf: [64]u8 = undefined;
@@ -229,6 +233,7 @@ pub fn build(b: *std.build.Builder) !void {
 
     const arch: std.Target.Cpu.Arch = target.getCpuArch();
 
+    // todo x: macos
     if (std.mem.eql(u8, os_tagname, "macos")) {
         os_tagname = "darwin";
         if (arch.isAARCH64()) {
@@ -236,7 +241,7 @@ pub fn build(b: *std.build.Builder) !void {
         } else if (arch.isX86()) {
             target.os_version_min = std.zig.CrossTarget.OsVersion{ .semver = .{ .major = 10, .minor = 14, .patch = 0 } };
         }
-    } else if (target.isLinux()) {
+    } else if (target.isLinux()) { // todo x: linux
         target.setGnuLibCVersion(2, 27, 0);
     }
     std.mem.copy(
@@ -257,18 +262,33 @@ pub fn build(b: *std.build.Builder) !void {
 
     var triplet = triplet_buf[0 .. osname.len + cpuArchName.len + 1];
 
+    // todo x: output
     const output_dir_base = try std.fmt.bufPrint(&output_dir_buf, "{s}{s}", .{ bin_label, triplet });
     output_dir = b.pathFromRoot(output_dir_base);
+
     const bun_executable_name = if (mode == std.builtin.Mode.Debug) "bun-debug" else "bun";
+
+    ////////////////////////////////////////////////////////////////////////////////////////
+
+    // todo x:
+    // todo x: exe 文件, 入口
+    // todo x:
     exe = b.addExecutable(bun_executable_name, if (target.getOsTag() == std.Target.Os.Tag.freestanding)
         "src/main_wasm.zig"
     else
         "src/main.zig");
+
     // exe.setLibCFile("libc.txt");
     exe.linkLibC();
     // exe.linkLibCpp();
 
+    ////////////////////////////////////////////////////////////////////////////////////////
+
+    // todo x:
+    // todo x:
+    // todo x:
     exe.setOutputDir(output_dir);
+
     updateRuntime() catch {};
 
     exe.setTarget(target);
@@ -276,6 +296,8 @@ pub fn build(b: *std.build.Builder) !void {
     b.install_path = output_dir;
 
     var typings_exe = b.addExecutable("typescript-decls", "src/typegen.zig");
+
+    ////////////////////////////////////////////////////////////////////////////////////////
 
     const min_version: std.builtin.Version = if (target.getOsTag() != .freestanding)
         target.getOsVersionMin().semver
@@ -298,6 +320,8 @@ pub fn build(b: *std.build.Builder) !void {
 
     var obj_step = b.step("obj", "Build bun as a .o file");
     var obj = b.addObject(bun_executable_name, exe.root_src.?.path);
+
+    ////////////////////////////////////////////////////////////////////////////////////////
 
     {
         obj.setTarget(target);
@@ -368,6 +392,10 @@ pub fn build(b: *std.build.Builder) !void {
         defer headers_step.dependOn(&headers_obj.step);
         try configureObjectStep(b, headers_obj, target, obj.main_pkg_path.?);
         var opts = b.addOptions();
+
+        // todo x:
+        // todo x:
+        // todo x:
         opts.addOption(
             bool,
             "bindgen",
@@ -475,6 +503,8 @@ pub fn build(b: *std.build.Builder) !void {
         }
     }
 
+    ////////////////////////////////////////////////////////////////////////////////////////
+
     try configureObjectStep(b, typings_exe, target, obj.main_pkg_path.?);
     try linkObjectFiles(b, typings_exe, target);
 
@@ -521,6 +551,8 @@ pub fn linkObjectFiles(b: *std.build.Builder, obj: *std.build.LibExeObjStep, tar
     }
 
     var added = std.AutoHashMap(u64, void).init(b.allocator);
+
+    ////////////////////////////////////////////////////////////////////////////////////////
 
     const files_we_care_about = std.ComptimeStringMap([]const u8, .{
         .{ "libmimalloc.o", "libmimalloc.o" },
