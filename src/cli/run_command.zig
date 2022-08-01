@@ -42,6 +42,9 @@ const yarn_commands: []u64 = @import("./list-of-yarn-commands.zig").all_yarn_com
 
 const ShellCompletions = @import("./shell_completions.zig");
 
+// todo x:
+// todo x:
+// todo x:
 pub const RunCommand = struct {
     const shells_to_search = &[_]string{
         "bash",
@@ -240,6 +243,10 @@ pub const RunCommand = struct {
         }
 
         var argv = [_]string{ shell_bin, "-c", combined_script };
+
+        // todo x:
+        // todo x:
+        // todo x:
         var child_process = std.ChildProcess.init(&argv, ctx.allocator);
 
         if (!silent) {
@@ -255,6 +262,9 @@ pub const RunCommand = struct {
         child_process.stdin_behavior = .Inherit;
         child_process.stdout_behavior = .Inherit;
 
+        // todo x:
+        // todo x:
+        // todo x:
         const result = child_process.spawnAndWait() catch |err| {
             Output.prettyErrorln("<r><red>error<r>: Failed to run script <b>{s}<r> due to error <b>{s}<r>", .{ name, @errorName(err) });
             Output.flush();
@@ -296,6 +306,9 @@ pub const RunCommand = struct {
         child_process.stdin_behavior = .Inherit;
         child_process.stdout_behavior = .Inherit;
 
+        // todo x:
+        // todo x:
+        // todo x:
         const result = child_process.spawnAndWait() catch |err| {
             if (err == error.AccessDenied) {
                 {
@@ -538,6 +551,9 @@ pub const RunCommand = struct {
         return shell_out;
     }
 
+    // todo x:
+    // todo x:
+    // todo x:
     pub fn exec(ctx: Command.Context, comptime bin_dirs_only: bool, comptime log_errors: bool) !bool {
         // Step 1. Figure out what we're trying to run
         var positionals = ctx.positionals;
@@ -962,6 +978,9 @@ pub const RunCommand = struct {
     }
 };
 
+// todo x:
+// todo x:
+// todo x:
 test "replacePackageManagerRun" {
     var copy_script = std.ArrayList(u8).init(default_allocator);
 

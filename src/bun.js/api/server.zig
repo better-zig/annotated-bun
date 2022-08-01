@@ -1788,6 +1788,9 @@ fn NewRequestContext(comptime ssl_enabled: bool, comptime debug_mode: bool, comp
     };
 }
 
+// todo x:
+// todo x:
+// todo x:
 pub fn NewServer(comptime ssl_enabled_: bool, comptime debug_mode_: bool) type {
     return struct {
         pub const ssl_enabled = ssl_enabled_;

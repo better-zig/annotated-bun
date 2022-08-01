@@ -3,6 +3,10 @@ const bun = @import("../../global.zig");
 const string = bun.string;
 const Output = bun.Output;
 const hasRef = std.meta.trait.hasField("ref");
+
+// todo x:
+// todo x:
+// todo x:
 const C_API = @import("../../jsc.zig").C;
 const StringPointer = @import("../../api/schema.zig").Api.StringPointer;
 const Exports = @import("./exports.zig");
@@ -15,7 +19,12 @@ const is_bindgen: bool = std.meta.globalOption("bindgen", bool) orelse false;
 const ArrayBuffer = @import("../base.zig").ArrayBuffer;
 const JSC = @import("../../jsc.zig");
 const Shimmer = JSC.Shimmer;
+
+// todo x:
+// todo x:
+// todo x:
 const FFI = @import("./FFI.zig");
+
 pub const JSObject = extern struct {
     pub const shim = Shimmer("JSC", "JSObject", @This());
     bytes: shim.Bytes,
@@ -1000,6 +1009,9 @@ pub fn NewGlobalObject(comptime Type: type) type {
     };
 }
 
+// todo x:
+// todo x:
+// todo x:
 pub const JSModuleLoader = extern struct {
     pub const shim = Shimmer("JSC", "JSModuleLoader", @This());
     bytes: shim.Bytes,
@@ -1079,6 +1091,9 @@ pub const JSModuleLoader = extern struct {
     };
 };
 
+// todo x:
+// todo x:
+// todo x:
 pub fn PromiseCallback(comptime Type: type, comptime CallbackFunction: fn (*Type, *JSGlobalObject, []const JSValue) anyerror!JSValue) type {
     return struct {
         pub fn callback(
@@ -1113,6 +1128,9 @@ pub const JSModuleRecord = extern struct {
     };
 };
 
+// todo x:
+// todo x:
+// todo x:
 pub const JSPromise = extern struct {
     pub const shim = Shimmer("JSC", "JSPromise", @This());
     bytes: shim.Bytes,
@@ -1200,6 +1218,9 @@ pub const JSPromise = extern struct {
     };
 };
 
+// todo x:
+// todo x:
+// todo x:
 pub const JSInternalPromise = extern struct {
     pub const shim = Shimmer("JSC", "JSInternalPromise", @This());
     bytes: shim.Bytes,

@@ -77,9 +77,19 @@ const VirtualMachine = @import("../javascript.zig").VirtualMachine;
 const IOTask = JSC.IOTask;
 const ComptimeStringMap = @import("../../comptime_string_map.zig").ComptimeStringMap;
 
+// todo x:
+// todo x:
+// todo x:
 const TCC = @import("../../tcc.zig");
 
+// todo x:
+// todo x:
+// todo x:
 pub const FFI = struct {
+
+    // todo x:
+    // todo x:
+    // todo x:
     dylib: ?std.DynLib = null,
     functions: std.StringArrayHashMapUnmanaged(Function) = .{},
     closed: bool = false,
@@ -261,6 +271,11 @@ pub const FFI = struct {
 
     // }
 
+    // ----------------------------------------------------------------
+
+    // todo x:
+    // todo x:
+    // todo x:
     pub fn open(global: *JSGlobalObject, name_str: ZigString, object: JSC.JSValue) JSC.JSValue {
         const allocator = VirtualMachine.vm.allocator;
         var name_slice = name_str.toSlice(allocator);
@@ -288,6 +303,11 @@ pub const FFI = struct {
             return JSC.toInvalidArguments("Expected at least one symbol", .{}, global.ref());
         }
 
+        // ----------------------------------------------------------------
+
+        // todo x:
+        // todo x:
+        // todo x:
         var dylib = std.DynLib.open(name) catch {
             return JSC.toInvalidArguments("Failed to open library", .{}, global.ref());
         };
@@ -314,6 +334,9 @@ pub const FFI = struct {
                 function.symbol_from_dynamic_library = resolved_symbol;
             }
 
+            // todo x:
+            // todo x:
+            // todo x:
             function.compile(allocator) catch |err| {
                 const ret = JSC.toInvalidArguments("{s} when compiling symbol \"{s}\" in \"{s}\"", .{
                     std.mem.span(@errorName(err)),
@@ -328,6 +351,10 @@ pub const FFI = struct {
                 dylib.close();
                 return ret;
             };
+
+            // todo x:
+            // todo x:
+            // todo x:
             switch (function.step) {
                 .failed => |err| {
                     for (symbols.values()) |*value| {
@@ -363,6 +390,11 @@ pub const FFI = struct {
             }
         }
 
+        // ----------------------------------------------------------------
+
+        // todo x:
+        // todo x:
+        // todo x:
         var lib = allocator.create(FFI) catch unreachable;
         lib.* = .{
             .dylib = dylib,
@@ -374,6 +406,11 @@ pub const FFI = struct {
         return JSC.JSValue.createObject2(global, &ZigString.init("close"), &ZigString.init("symbols"), close_object, obj);
     }
 
+    // ----------------------------------------------------------------
+
+    // todo x:
+    // todo x:
+    // todo x:
     pub fn linkSymbols(global: *JSGlobalObject, object: JSC.JSValue) JSC.JSValue {
         const allocator = VirtualMachine.vm.allocator;
 

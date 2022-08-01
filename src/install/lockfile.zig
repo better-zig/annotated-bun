@@ -42,6 +42,10 @@ const HTTPChannel = @import("http").HTTPChannel;
 const NetworkThread = @import("http").NetworkThread;
 
 const Integrity = @import("./integrity.zig").Integrity;
+
+// todo x:
+// todo x:
+// todo x:
 const clap = @import("clap");
 const ExtractTarball = @import("./extract_tarball.zig");
 const Npm = @import("./npm.zig");

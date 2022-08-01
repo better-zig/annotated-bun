@@ -38,6 +38,10 @@ const JSPrinter = @import("../js_printer.zig");
 const DotEnv = @import("../env_loader.zig");
 const NPMClient = @import("../which_npm_client.zig").NPMClient;
 const which = @import("../which.zig").which;
+
+// todo x:
+// todo x:
+// todo x:
 const clap = @import("clap");
 const Lock = @import("../lock.zig").Lock;
 const Headers = @import("http").Headers;
@@ -144,7 +148,7 @@ fn execTask(allocator: std.mem.Allocator, task_: string, cwd: string, _: string,
     Output.disableBuffering();
     defer Output.enableBuffering();
 
-    proc = std.ChildProcess.init(argv, allocator) ;
+    proc = std.ChildProcess.init(argv, allocator);
     proc.stdin_behavior = .Inherit;
     proc.stdout_behavior = .Inherit;
     proc.stderr_behavior = .Inherit;

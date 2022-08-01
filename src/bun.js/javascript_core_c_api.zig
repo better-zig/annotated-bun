@@ -1,4 +1,11 @@
+// todo x:
+// todo x:
+// todo x:
 const cpp = @import("./bindings/bindings.zig");
+
+// todo x:
+// todo x:
+// todo x:
 const generic = opaque {
     pub fn value(this: *const @This()) cpp.JSValue {
         return @bitCast(cpp.JSValue.Type, @ptrToInt(this));
@@ -8,6 +15,9 @@ const generic = opaque {
         return this.ptr().bunVM();
     }
 };
+
+// ----------------------------------------------------------------
+
 pub const Private = anyopaque;
 pub const struct_OpaqueJSContextGroup = generic;
 pub const JSContextGroupRef = ?*const struct_OpaqueJSContextGroup;
@@ -176,6 +186,10 @@ pub const JSStaticFunction = extern struct {
     callAsFunction: JSObjectCallAsFunctionCallback,
     attributes: JSPropertyAttributes,
 };
+
+// todo x:
+// todo x:
+// todo x:
 pub const JSClassDefinition = extern struct {
     version: c_int,
     attributes: JSClassAttributes,

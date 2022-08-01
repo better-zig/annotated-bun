@@ -1,6 +1,9 @@
 // Top-level so it can access all files
 pub const is_bindgen = @import("std").meta.globalOption("bindgen", bool) orelse false;
 
+// todo x:
+// todo x:
+// todo x:
 pub const napi = @import("./napi/napi.zig");
 pub usingnamespace @import("./bun.js/bindings/exports.zig");
 pub usingnamespace @import("./bun.js/bindings/bindings.zig");
@@ -9,6 +12,10 @@ pub usingnamespace @import("./bun.js/base.zig");
 pub const RareData = @import("./bun.js/rare_data.zig");
 pub const Shimmer = @import("./bun.js/bindings/shimmer.zig").Shimmer;
 pub usingnamespace @import("./bun.js/javascript.zig");
+
+// todo x:
+// todo x:
+// todo x:
 pub const C = @import("./bun.js/javascript_core_c_api.zig");
 pub const WebCore = @import("./bun.js/webcore.zig");
 pub const Cloudflare = struct {
@@ -33,6 +40,10 @@ pub const API = struct {
     pub const Router = @import("./bun.js/api/router.zig");
     pub const ServerConfig = @import("./bun.js/api/server.zig").ServerConfig;
 };
+
+// todo x:
+// todo x:
+// todo x:
 pub const FFI = @import("./bun.js/api/ffi.zig").FFI;
 pub const Node = struct {
     pub usingnamespace @import("./bun.js/node/types.zig");

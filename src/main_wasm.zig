@@ -15,7 +15,15 @@ const Output = global.Output;
 
 export var code_buffer_ptr: ?[*]const u8 = null;
 pub const bindgen = true;
+
+// todo x:
+// todo x:
+// todo x:
 const Main = @This();
+
+// todo x:
+// todo x:
+// todo x:
 pub const os = struct {
     pub const c = Main.system;
     pub const system = Main.system;
@@ -165,6 +173,10 @@ var output_files: [1]Api.OutputFile = undefined;
 var buffer_writer: JSPrinter.BufferWriter = undefined;
 var writer: JSPrinter.BufferPrinter = undefined;
 var define: *Define.Define = undefined;
+
+// todo x:
+// todo x:
+// todo x:
 export fn bun_malloc(size: usize) u64 {
     return @bitCast(u64, [2]u32{
         @ptrToInt((default_allocator.alloc(u8, size) catch unreachable).ptr),
@@ -172,6 +184,9 @@ export fn bun_malloc(size: usize) u64 {
     });
 }
 
+// todo x:
+// todo x:
+// todo x:
 export fn bun_free(bytes: u64) void {
     default_allocator.free(Uint8Array.fromJS(bytes));
 }
@@ -181,6 +196,10 @@ var output_stream = std.io.fixedBufferStream(&output_stream_buf);
 var error_stream_buf: [16384]u8 = undefined;
 var error_stream = std.io.fixedBufferStream(&error_stream_buf);
 var output_source: global.Output.Source = undefined;
+
+// todo x:
+// todo x:
+// todo x:
 export fn init() void {
     const Mimalloc = @import("./allocators/mimalloc.zig");
     // reserve 256 MB upfront
